@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">VeterinaryApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_cita">CitaActivity</string>
+    <string name="title_activity_servicio">ServicioActivity</string>
+    <string name="title_activity_mascota">MascotaActivity</string>
+    <string name="title_activity_reservar_cita">ReservarCitaActivity</string>
+    <string name="title_activity_consultar_cita">ConsultarCitaActivity</string>
+    <string name="title_activity_detalle_cita">DetalleCitaActivity</string>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pe.edu.upc.veterinaryapp" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light" >
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="MENU" >
+        </activity>
+        <activity
+            android:name=".CitaActivity"
+            android:label="CITA" >
+        </activity>
+        <activity
+            android:name=".ServicioActivity"
+            android:label="SERVICIO" >
+        </activity>
+        <activity
+            android:name=".MascotaActivity"
+            android:label="MI MASCOTA" >
+        </activity>
+        <activity
+            android:name=".ReservarCitaActivity"
+            android:label="RESERVAR CITA" >
+        </activity>
+        <activity
+            android:name=".ConsultarCitaActivity"
+            android:label="CONSULTAR CITAS PENDIENTES" >
+        </activity>
+        <activity
+            android:name=".DetalleCitaActivity"
+            android:label="DETALLE DE CITA" >
+        </activity>
+    </application>
+
+</manifest>

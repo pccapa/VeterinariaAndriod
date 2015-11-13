@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="pe.edu.upc.veterinaryapp.MascotaActivity">
+
+    <item android:id="@+id/action_update"
+        app:showAsAction="ifRoom|withText"
+        android:title="Subir Foto"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:orderInCategory="1"
+        />
+</menu>
