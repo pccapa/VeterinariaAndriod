@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class CitaActivity extends AppCompatActivity {
 
-
     private Button btReservaCita,btConsultarCita;
 
 

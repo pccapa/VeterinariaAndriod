@@ -56,7 +56,7 @@ public class ReservarCitaActivity extends AppCompatActivity {
 
             Context context = getApplicationContext();
             Toast.makeText(context , "Reserva Exitosa: ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ReservarCitaActivity.this, CitaActivity.class);
+            Intent intent = new Intent(ReservarCitaActivity.this, MenuActivity.class);
             startActivity(intent);
 
         }

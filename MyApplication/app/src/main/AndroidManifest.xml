@@ -44,6 +44,18 @@
             android:name=".DetalleCitaActivity"
             android:label="DETALLE DE CITA" >
         </activity>
+        <activity
+            android:name=".ServicioPeluqueriaActivity"
+            android:label="SERVICIO PELUQUERIA" >
+        </activity>
+        <activity
+            android:name=".ConsultarServicio"
+            android:label="CONSULTAR SERVICIOS PENDIENTES" >
+        </activity>
+        <activity
+            android:name=".DetallePeluqueriaActivity"
+            android:label="DETALLE SERVICIO PELUQUERIA" >
+        </activity>
     </application>
 
 </manifest>

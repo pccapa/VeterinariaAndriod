@@ -66,7 +66,7 @@ public class DetalleCitaActivity extends AppCompatActivity {
 
             Context context = getApplicationContext();
             Toast.makeText(context, "Reserva Cancelada: ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(DetalleCitaActivity.this,CitaActivity.class);
+            Intent intent = new Intent(DetalleCitaActivity.this,MenuActivity.class);
 
             startActivity(intent);
             return true;
@@ -78,7 +78,7 @@ public class DetalleCitaActivity extends AppCompatActivity {
 
             Context context = getApplicationContext();
             Toast.makeText(context, "Reserva Actualizada: ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(DetalleCitaActivity.this,ConsultarCitaActivity.class);
+            Intent intent = new Intent(DetalleCitaActivity.this,MenuActivity.class);
 
             startActivity(intent);
             return true;

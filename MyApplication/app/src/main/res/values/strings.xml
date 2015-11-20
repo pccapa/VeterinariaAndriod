@@ -10,4 +10,7 @@
     <string name="title_activity_reservar_cita">ReservarCitaActivity</string>
     <string name="title_activity_consultar_cita">ConsultarCitaActivity</string>
     <string name="title_activity_detalle_cita">DetalleCitaActivity</string>
+    <string name="title_activity_servicio_peluqueria">ServicioPeluqueriaActivity</string>
+    <string name="title_activity_consultar_servicio">ConsultarServicio</string>
+    <string name="title_activity_detalle_peluqueria">DetallePeluqueriaActivity</string>
 </resources>
