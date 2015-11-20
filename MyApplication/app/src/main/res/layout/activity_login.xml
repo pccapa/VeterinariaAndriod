@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
 
     tools:context=".LoginActivity"
-    android:background="#463aff">
+    android:background="#ffffff">
 
 
 
@@ -20,12 +20,15 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/etUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLength="8"
-            android:hint="Usuario" />
+            android:hint="Usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etUser"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_edittext"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -58,6 +61,7 @@
 
 
     </LinearLayout>
+
 
 </LinearLayout>
 
