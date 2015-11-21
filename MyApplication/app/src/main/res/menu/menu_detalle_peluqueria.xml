@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="pe.edu.upc.veterinaryapp.DetallePeluqueriaActivity">
+    <item android:id="@+id/action_cancelar"
+        app:showAsAction="ifRoom|withText"
+        android:title="Cancelar"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:orderInCategory="1"
+        />
+
+    <item android:id="@+id/action_update"
+        app:showAsAction="ifRoom|withText"
+        android:title="Actualizar"
+        android:icon="@android:drawable/ic_input_add"
+        android:orderInCategory="1"
+        />
+</menu>
