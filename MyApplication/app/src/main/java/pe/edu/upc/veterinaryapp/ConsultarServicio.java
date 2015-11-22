@@ -30,8 +30,6 @@ public class ConsultarServicio extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listaCita);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, listaCitas);
 
-
-
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
