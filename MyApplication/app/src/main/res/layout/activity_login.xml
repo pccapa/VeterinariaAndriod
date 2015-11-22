@@ -7,44 +7,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-
     tools:context=".LoginActivity"
-    android:background="#ffffff">
+    android:baselineAligned="false"
+    android:weightSum="1">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView2"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_clinicaveterinaria"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
 
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilUser"
-        android:theme="@style/Theme.AppCompat"
+    <EditText
+        android:inputType="text"
+        android:maxLength="8"
+        android:hint="Usuario"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/etUser"
+        android:layout_gravity="center_horizontal"
+        style="@style/Theme.EditTextTheme" />
 
-        <EditText
-            android:inputType="text"
-            android:maxLength="8"
-            android:hint="Usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etUser"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/rounded_edittext"
-            />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/tilPassword"
+    <EditText
         android:layout_width="match_parent"
-        android:theme="@style/Theme.AppCompat"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/etPassword"
-            android:hint="Password" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/etPassword"
+        android:hint="Password"
+        style="@style/Theme.EditTextTheme" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +50,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="INGRESAR" />
+            android:text="INGRESAR"
+            style="@style/Theme.ButtonTheme"
+            android:layout_marginTop="10dp" />
 
 
     </LinearLayout>

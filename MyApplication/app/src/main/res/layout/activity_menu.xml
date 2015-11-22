@@ -15,7 +15,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/txtWelcome" />
+        android:id="@+id/txtWelcome"
+        android:layout_marginBottom="20dp" />
+
+    <ImageView
+        android:layout_width="139dp"
+        android:layout_height="170dp"
+        android:id="@+id/imageView3"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_clinicaveterinaria"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CITA" />
+            android:text="CITA"
+            style="@style/Theme.ButtonTheme" />
 
 
 
@@ -51,7 +62,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SERVICIO" />
+            android:text="SERVICIO"
+            style="@style/Theme.ButtonTheme" />
     </LinearLayout>
 
 
@@ -65,7 +77,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MASCOTA" />
+            android:text="MASCOTA"
+            style="@style/Theme.ButtonTheme" />
     </LinearLayout>
 
 

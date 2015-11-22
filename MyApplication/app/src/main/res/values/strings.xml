@@ -13,4 +13,8 @@
     <string name="title_activity_servicio_peluqueria">ServicioPeluqueriaActivity</string>
     <string name="title_activity_consultar_servicio">ConsultarServicio</string>
     <string name="title_activity_detalle_peluqueria">DetallePeluqueriaActivity</string>
+
+
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
 </resources>

@@ -9,6 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="pe.edu.upc.veterinaryapp.ServicioActivity">
 
+    <ImageView
+        android:layout_width="139dp"
+        android:layout_height="170dp"
+        android:id="@+id/imageView5"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_clinicaveterinaria"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,10 +26,11 @@
 
         <Button
             android:id="@+id/btMenu1"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SERVICIO PELUQUERIA" />
+            android:text="SERVICIO PELUQUERIA"
+            style="@style/Theme.ButtonTheme" />
 
 
 
@@ -40,10 +50,11 @@
 
         <Button
             android:id="@+id/btMenu2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SERVICIO COMIDA" />
+            android:text="SERVICIO COMIDA"
+            style="@style/Theme.ButtonTheme" />
     </LinearLayout>
 
 
@@ -54,10 +65,11 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/btMenu3"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CONSULTAR SERVICIO" />
+            android:text="CONSULTAR SERVICIO"
+            style="@style/Theme.ButtonTheme" />
     </LinearLayout>
 
 

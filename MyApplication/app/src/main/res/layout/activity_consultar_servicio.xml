@@ -12,7 +12,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/Theme.LayoutTheme">
 
 
         <TextView
@@ -23,20 +24,29 @@
             android:id="@+id/textView2" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spPet" />
+            android:id="@+id/spPet"
+            style=' style="@style/Theme.SpinnerTheme"' />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        style="@style/Theme.LayoutTheme"
+        android:layout_marginTop="5dp">
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listaCita" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView2" >
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listaCita" />
+        </ScrollView>
     </LinearLayout>
 
 

@@ -10,6 +10,15 @@ android:paddingTop="@dimen/activity_vertical_margin"
 tools:context="pe.edu.upc.veterinaryapp.CitaActivity">
 
 
+    <ImageView
+        android:layout_width="139dp"
+        android:layout_height="170dp"
+        android:id="@+id/imageView4"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_clinicaveterinaria"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
+
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,10 +27,11 @@ tools:context="pe.edu.upc.veterinaryapp.CitaActivity">
 
     <Button
         android:id="@+id/btReservaCita"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="RESERVAR CITA" />
+        android:text="RESERVAR CITA"
+        style="@style/Theme.ButtonTheme" />
 
 </LinearLayout>
 
@@ -36,10 +46,11 @@ tools:context="pe.edu.upc.veterinaryapp.CitaActivity">
 
     <Button
         android:id="@+id/btConsultarCita"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="CONSULTAR CITA" />
+        android:text="CONSULTAR CITA"
+        style="@style/Theme.ButtonTheme" />
 </LinearLayout>
 
 

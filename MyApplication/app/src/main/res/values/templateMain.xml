@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MainTheme" parent="android:Theme.DeviceDefault.Settings">
+    </style>
+
+    <style name="Theme.ButtonTheme" parent="android:Theme.DeviceDefault.Settings">
+        <item name="android:background">#006b64</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="Theme.EditTextTheme" parent="android:Theme.DeviceDefault.Settings">
+        <item name="android:backgroundTint">#740000</item>
+        <item name="android:layout_weight">0.05</item>
+        <item name="android:borderlessButtonStyle">@color/button_material_dark</item>
+    </style>
+
+
+    <style name="Theme.SpinnerTheme" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@null</item>
+        <item name="android:overlapAnchor">true</item>
+    </style>
+
+    <style name="Theme.LayoutTheme" parent="Widget.AppCompat.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/border_layout</item>
+    </style>
+
+</resources>
