@@ -40,7 +40,6 @@ public class DetallePeluqueriaActivity extends AppCompatActivity {
             return true;
         }
 
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_update) {
 

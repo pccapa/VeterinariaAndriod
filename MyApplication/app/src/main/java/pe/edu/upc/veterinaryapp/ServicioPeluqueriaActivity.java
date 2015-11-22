@@ -59,7 +59,6 @@ public class ServicioPeluqueriaActivity extends AppCompatActivity {
             Toast.makeText(context, "Grabacion Exitosa: ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ServicioPeluqueriaActivity.this, MenuActivity.class);
             startActivity(intent);
-
         }
     };
 
