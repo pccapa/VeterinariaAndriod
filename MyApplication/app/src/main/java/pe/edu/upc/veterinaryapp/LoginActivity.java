@@ -23,8 +23,8 @@ public class LoginActivity extends  AppCompatActivity {
 
 
 
-        tilUser = (TextInputLayout) findViewById(R.id.tilUser);
-        tilPassword = (TextInputLayout) findViewById(R.id.tilPassword);
+        //tilUser = (TextInputLayout) findViewById(R.id.tilUser);
+      //  tilPassword = (TextInputLayout) findViewById(R.id.tilPassword);
 
 
         etUser = (EditText) findViewById(R.id.etUser);
