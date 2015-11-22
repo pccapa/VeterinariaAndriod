@@ -22,7 +22,6 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="MASCOTA :"
             android:id="@+id/textView2" />
-
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
