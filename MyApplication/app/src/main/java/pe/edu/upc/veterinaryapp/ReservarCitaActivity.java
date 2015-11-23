@@ -1,11 +1,15 @@
 package pe.edu.upc.veterinaryapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,12 +17,47 @@ import android.widget.Toast;
 import android.view.Gravity;
 import android.content.Context;
 
-public class ReservarCitaActivity extends AppCompatActivity {
+public class ReservarCitaActivity extends Fragment {
 
     private Spinner spDoctor,spPet,spType,spHora;
-
     private Button btGrabar;
+
+
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_reservar_cita , container,
+                false);
+
+        spDoctor = (Spinner) view.findViewById(R.id.spDoctor);
+        String []opciones1={"ANA COTRINA","GUSTAVO SALAZAR","RODRIGO  MEDINA"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones1);
+        spDoctor.setAdapter(adapter1);
+
+        spPet = (Spinner) view.findViewById(R.id.spPet);
+        String []opciones2={"FIFO","LUCHITA"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones2);
+        spPet.setAdapter(adapter2);
+
+        spType = (Spinner) view.findViewById(R.id.spType);
+        String []opciones3={"DOMICILIO","CLINICA"};
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones3);
+        spType.setAdapter(adapter3);
+
+        spHora = (Spinner) view.findViewById(R.id.spHora);
+        String []opciones4={"09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"};
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones4);
+        spHora.setAdapter(adapter4);
+
+        btGrabar = (Button) view.findViewById(R.id.btGrabar);
+
+        btGrabar.setOnClickListener(btGrabarOnClickListener);
+
+        return view;
+    }
+
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservar_cita);
@@ -47,22 +86,29 @@ public class ReservarCitaActivity extends AppCompatActivity {
         btGrabar.setOnClickListener(btGrabarOnClickListener);
 
     }
-
+*/
 
     View.OnClickListener btGrabarOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
 
-            Context context = getApplicationContext();
+            Context context = getActivity().getApplicationContext();
             Toast.makeText(context , "Reserva Exitosa: ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ReservarCitaActivity.this, MenuActivity.class);
-            startActivity(intent);
+
+            Fragment fragment = null;
+            fragment = new CitaActivity();
+
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
+           /* Intent intent = new Intent(ReservarCitaActivity.this, MenuActivity.class);
+            startActivity(intent);*/
 
         }
     };
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_reservar_cita, menu);
@@ -82,5 +128,5 @@ public class ReservarCitaActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

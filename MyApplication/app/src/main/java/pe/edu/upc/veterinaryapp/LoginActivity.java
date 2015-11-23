@@ -62,7 +62,7 @@ public class LoginActivity extends  AppCompatActivity {
 
 
             if (isComplete) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                Intent intent = new Intent(LoginActivity.this, NavegacionActivity.class);
                 intent.putExtra("NOMBRES", etUser.getText().toString() );
                         intent.putExtra("APELLIDOS", etPassword.getText().toString());
                 startActivity(intent);

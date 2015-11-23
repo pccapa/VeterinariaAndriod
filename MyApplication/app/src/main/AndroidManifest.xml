@@ -25,50 +25,11 @@
             android:label="MENU" >
         </activity>
         <activity
-            android:name=".CitaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="CITA" >
+            android:name=".NavegacionActivity"
+            android:theme="@style/Theme.AppThemeNavigation"
+            android:label="MENU" >
         </activity>
-        <activity
-            android:name=".ServicioActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="SERVICIO" >
-        </activity>
-        <activity
-            android:name=".MascotaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="MI MASCOTA" >
-        </activity>
-        <activity
-            android:name=".ReservarCitaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="RESERVAR CITA" >
-        </activity>
-        <activity
-            android:name=".ConsultarCitaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="CONSULTAR CITAS PENDIENTES" >
-        </activity>
-        <activity
-            android:name=".DetalleCitaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="DETALLE DE CITA" >
-        </activity>
-        <activity
-            android:name=".ServicioPeluqueriaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="SERVICIO PELUQUERIA" >
-        </activity>
-        <activity
-            android:name=".ConsultarServicio"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="CONSULTAR SERVICIOS PENDIENTES" >
-        </activity>
-        <activity
-            android:name=".DetallePeluqueriaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="DETALLE SERVICIO PELUQUERIA" >
-        </activity>
+
     </application>
 
 </manifest>

@@ -4,6 +4,14 @@
     <style name="Theme.MainTheme" parent="android:Theme.Holo.Light">
     </style>
 
+    <style name="Theme.AppThemeNavigation" parent="android:Theme.Holo.Light">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:icon">@android:color/transparent</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
     <style name="Theme.ButtonTheme" parent="android:Theme.DeviceDefault.Settings">
         <item name="android:background">#006b64</item>
         <item name="android:textColor">#ffffff</item>

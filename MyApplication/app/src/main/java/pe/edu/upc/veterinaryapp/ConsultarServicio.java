@@ -1,21 +1,58 @@
 package pe.edu.upc.veterinaryapp;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-public class ConsultarServicio extends AppCompatActivity {
+public class ConsultarServicio extends Fragment {
 
     private Spinner spPet;
     private ListView lv;
     private String[] listaCitas = { "Cita1", "Cita2", "Cita3"};
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_consultar_servicio, container,
+                false);
+
+        spPet = (Spinner) view.findViewById(R.id.spPet);
+        String []opciones2={"FIFO","LUCHITA"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones2);
+        spPet.setAdapter(adapter2);
+
+
+        lv = (ListView) view.findViewById(R.id.listaCita);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, listaCitas);
+
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int position, long arg3) {
+
+                /*Intent intent = new Intent(ConsultarServicio.this, DetallePeluqueriaActivity.class);
+                startActivity(intent);*/
+            }
+        });
+
+        return view;
+    }
+
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,5 +101,5 @@ public class ConsultarServicio extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

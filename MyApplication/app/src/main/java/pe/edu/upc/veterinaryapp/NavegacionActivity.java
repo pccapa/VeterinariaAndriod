@@ -18,8 +18,6 @@ import java.util.List;
 
 import pe.edu.upc.veterinaryapp.navigation.CustomDrawerAdapter;
 import pe.edu.upc.veterinaryapp.navigation.DrawerItem;
-import pe.edu.upc.veterinaryapp.navigation.FragmentOne;
-import pe.edu.upc.veterinaryapp.navigation.FragmentTwo;
 
 /**
  * Created by pablo on 21/11/15.
@@ -38,7 +36,7 @@ public class NavegacionActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_navegacion);
 
         // Initializing
@@ -65,8 +63,9 @@ public class NavegacionActivity extends Activity {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setIcon(null);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.mipmap.ic_mascota , R.string.drawer_open,
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.mipmap.ic_menu , R.string.drawer_open,
                 R.string.drawer_close) {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(mTitle);
@@ -86,7 +85,7 @@ public class NavegacionActivity extends Activity {
         if (savedInstanceState == null) {
             SelectItem(0);
         }
-
+        super.onCreate(savedInstanceState);
     }
 
 
@@ -129,25 +128,27 @@ public class NavegacionActivity extends Activity {
         Fragment fragment = null;
         Bundle args = new Bundle();
         switch (possition) {
-            case 0:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+            case 0://Cita
+                fragment = new CitaActivity();
+                /*args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
                         .getItemName());
                 args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+                        .getImgResID());*/
                 break;
-            case 1:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+            case 1://Servicio
+                fragment = new ServicioActivity();
+                /*args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
                         .getItemName());
                 args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+                        .getImgResID());*/
                 break;
+            case 2: //Mascota
+                fragment = new MascotaActivity();
             default:
                 break;
 
         }
-        fragment.setArguments(args);
+        //fragment.setArguments(args);
         FragmentManager frgManager = getFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment)
                 .commit();

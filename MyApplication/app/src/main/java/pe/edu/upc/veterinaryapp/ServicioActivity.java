@@ -1,41 +1,67 @@
 package pe.edu.upc.veterinaryapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
-public class ServicioActivity extends AppCompatActivity {
+public class ServicioActivity extends Fragment {
     private Button btMenu1,btMenu2,btMenu3;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_servicio, container,
+                false);
+
+        btMenu1 = (Button) view.findViewById(R.id.btMenu1);
+        btMenu1.setOnClickListener(btMenu1OnClickListener);
+
+        btMenu2 = (Button) view.findViewById(R.id.btMenu2);
+        btMenu2.setOnClickListener(btMenu2OnClickListener);
+
+        btMenu3 = (Button) view.findViewById(R.id.btMenu3);
+        btMenu3.setOnClickListener(btMenu3OnClickListener);
+
+        return view;
+    }
+
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servicio);
 
         btMenu1 = (Button) findViewById(R.id.btMenu1);
-
         btMenu1.setOnClickListener(btMenu1OnClickListener);
 
         btMenu2 = (Button) findViewById(R.id.btMenu2);
-
         btMenu2.setOnClickListener(btMenu2OnClickListener);
 
         btMenu3 = (Button) findViewById(R.id.btMenu3);
-
         btMenu3.setOnClickListener(btMenu3OnClickListener);
-    }
+    }*/
 
     //PELUQUERIA
     View.OnClickListener btMenu1OnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(ServicioActivity.this, ServicioPeluqueriaActivity.class);
+            Fragment fragment = null;
+            fragment = new ServicioPeluqueriaActivity();
 
-            startActivity(intent);
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
+
         }
     };
 
@@ -44,27 +70,30 @@ public class ServicioActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+            Fragment fragment = null;
+            fragment = new ServicioActivity();
 
-            Intent intent = new Intent(ServicioActivity.this, ServicioActivity.class);
-
-            startActivity(intent);
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
 
         }
     };
 
-    //MI MASCOTA
+    //Consultar servicio
     View.OnClickListener btMenu3OnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
+            Fragment fragment = null;
+            fragment = new ConsultarServicio();
 
-
-            Intent intent = new Intent(ServicioActivity.this, ConsultarServicio.class);
-
-            startActivity(intent);
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
         }
     };
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -85,5 +114,5 @@ public class ServicioActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

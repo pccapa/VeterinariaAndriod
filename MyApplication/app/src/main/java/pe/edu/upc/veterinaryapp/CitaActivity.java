@@ -1,33 +1,44 @@
 package pe.edu.upc.veterinaryapp;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
-public class CitaActivity extends AppCompatActivity {
+public class CitaActivity extends Fragment {
 
     private Button btReservaCita,btConsultarCita;
 
-
-
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_cita, container,
+                false);
+
+        btReservaCita = (Button) view.findViewById(R.id.btReservaCita);
+        btReservaCita.setOnClickListener(btReservaCitaOnClickListener);
+
+        btConsultarCita = (Button) view.findViewById(R.id.btConsultarCita);
+        btConsultarCita.setOnClickListener(btConsultarCitaOnClickListener);
+
+        return view;
+    }
+
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cita);
 
         btReservaCita = (Button) findViewById(R.id.btReservaCita);
-
         btReservaCita.setOnClickListener(btReservaCitaOnClickListener);
 
-
         btConsultarCita = (Button) findViewById(R.id.btConsultarCita);
-
         btConsultarCita.setOnClickListener(btConsultarCitaOnClickListener);
-    }
+    }*/
 
 
     //RESERVAR CITA
@@ -35,9 +46,16 @@ public class CitaActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(CitaActivity.this, ReservarCitaActivity.class);
+            Fragment fragment = null;
+            fragment = new ReservarCitaActivity();
 
-            startActivity(intent);
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
+
+            /*Intent intent = new Intent(CitaActivity.this, ReservarCitaActivity.class);
+
+            startActivity(intent);*/
         }
     };
 
@@ -46,13 +64,19 @@ public class CitaActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(CitaActivity.this, ConsultarCitaActivity.class);
+            Fragment fragment = null;
+            fragment = new ConsultarCitaActivity();
 
-            startActivity(intent);
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+                    .commit();
+           /* Intent intent = new Intent(CitaActivity.this, ConsultarCitaActivity.class);
+
+            startActivity(intent);*/
         }
     };
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_cita, menu);
@@ -72,5 +96,5 @@ public class CitaActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
