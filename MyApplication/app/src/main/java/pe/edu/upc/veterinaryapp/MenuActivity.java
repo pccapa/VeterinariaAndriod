@@ -29,7 +29,7 @@ public class MenuActivity extends AppCompatActivity {
         String nombre = getIntent().getStringExtra("NOMBRES");
         String apellidos = getIntent().getStringExtra("APELLIDOS");
 
-        txtWelcome.setText("BIENVENIDO  " + "JUAN" + "GARCIA");
+        txtWelcome.setText(nombre + " " +apellidos);
 
         btMenu1 = (Button) findViewById(R.id.btMenu1);
 

@@ -23,8 +23,8 @@ public class LoginActivity extends  AppCompatActivity {
 
 
 
-        //tilUser = (TextInputLayout) findViewById(R.id.tilUser);
-      //  tilPassword = (TextInputLayout) findViewById(R.id.tilPassword);
+        tilUser = (TextInputLayout) findViewById(R.id.tilUser);
+      tilPassword = (TextInputLayout) findViewById(R.id.tilPassword);
 
 
         etUser = (EditText) findViewById(R.id.etUser);
@@ -63,10 +63,9 @@ public class LoginActivity extends  AppCompatActivity {
 
             if (isComplete) {
                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                intent.putExtra("NOMBRES", "JUAN");
-                intent.putExtra("APELLIDOS", "GARCIA");
+                intent.putExtra("NOMBRES", etUser.getText().toString() );
+                        intent.putExtra("APELLIDOS", etPassword.getText().toString());
                 startActivity(intent);
-
                 finish();
             }
         }

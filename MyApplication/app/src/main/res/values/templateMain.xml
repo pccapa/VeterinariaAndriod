@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MainTheme" parent="android:Theme.DeviceDefault.Settings">
+    <style name="Theme.MainTheme" parent="android:Theme.Holo.Light">
     </style>
 
     <style name="Theme.ButtonTheme" parent="android:Theme.DeviceDefault.Settings">
