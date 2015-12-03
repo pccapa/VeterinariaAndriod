@@ -8,7 +8,7 @@ public interface IPetSchema {
     String COLUMN_PET_ID = "idPet";
     String COLUMN_PET_NAME = "name";
     String COLUMN_RACE_ID = "idRace";
-    String COLUMN_RACE = "idRace";
+    String COLUMN_RACE = "Race";
     String COLUMN_PET_SEXO = "sexo";
     String COLUMN_PET_PHOTO = "photo";
     String COLUMN_ID_CUSTOMER = "idCustomer";

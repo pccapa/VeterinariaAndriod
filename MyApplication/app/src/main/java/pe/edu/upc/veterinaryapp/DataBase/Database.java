@@ -7,6 +7,7 @@ import android.util.Log;
 
 import pe.edu.upc.veterinaryapp.DBDAO.CustomerDao;
 import pe.edu.upc.veterinaryapp.DBDAO.HairdresserDao;
+import pe.edu.upc.veterinaryapp.DBDAO.PetDao;
 import pe.edu.upc.veterinaryapp.DBDAO.UserDao;
 import java.sql.SQLException;
 
@@ -34,6 +35,7 @@ public class Database {
     public static UserDao mUserDao;
     public static CustomerDao mCustomerDao;
     public static HairdresserDao mHairdresserDao;
+    public static PetDao mPetDao;
 
 
 
@@ -44,6 +46,7 @@ public class Database {
         mUserDao = new UserDao(mDb);
         mCustomerDao = new CustomerDao(mDb);
         mHairdresserDao =new HairdresserDao(mDb);
+        mPetDao =new PetDao(mDb);
         return this;
     }
 

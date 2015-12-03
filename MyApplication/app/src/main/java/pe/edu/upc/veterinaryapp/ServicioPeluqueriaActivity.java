@@ -21,6 +21,7 @@ import java.util.List;
 
 import pe.edu.upc.veterinaryapp.DataBase.Database;
 import pe.edu.upc.veterinaryapp.entities.Hairdresser;
+import pe.edu.upc.veterinaryapp.entities.Pet;
 
 public class ServicioPeluqueriaActivity extends Fragment {
 
@@ -45,17 +46,24 @@ public class ServicioPeluqueriaActivity extends Fragment {
 
         List<Hairdresser > hairdresserList=null;
         hairdresserList= Database.mHairdresserDao.fetchAllHairdresser();
+        List<Pet > petList=null;
+        petList= Database.mPetDao.fetchAllPet();
 
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
-        String []opciones2={"FIFO","LUCHITA"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones2);
+        //String []opciones2={"FIFO","LUCHITA"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
+        for (Pet pet :petList) {
+            adapter2.add(pet.getName());
+        }
         spPet.setAdapter(adapter2);
 
         spMovilidad = (Spinner) view.findViewById(R.id.spMovilidad);
-        String []opciones1={"RECOJO Y ENVIO","ENVIO"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones1);
-        spMovilidad.setAdapter(adapter1);
+        //String []opciones1={"RECOJO Y ENVIO","ENVIO"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
+        for (Pet pet :petList) {
+            adapter1.add(pet.getName());
+        }
 
         spServicio = (Spinner) view.findViewById(R.id.spServicio);
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
