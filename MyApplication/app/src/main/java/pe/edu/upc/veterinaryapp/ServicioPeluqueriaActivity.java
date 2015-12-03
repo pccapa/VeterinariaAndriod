@@ -16,11 +16,18 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import pe.edu.upc.veterinaryapp.DataBase.Database;
+import pe.edu.upc.veterinaryapp.entities.Hairdresser;
+
 public class ServicioPeluqueriaActivity extends Fragment {
 
     private Spinner spMovilidad,spPet,spHora,spServicio;
 
     private Button btGrabar;
+    public static Database mDb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +35,17 @@ public class ServicioPeluqueriaActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_servicio_peluqueria, container,
                 false);
+
+        mDb = new Database(getActivity());
+        try {
+            mDb.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        List<Hairdresser > hairdresserList=null;
+        hairdresserList= Database.mHairdresserDao.fetchAllHairdresser();
+
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
         String []opciones2={"FIFO","LUCHITA"};
@@ -40,8 +58,10 @@ public class ServicioPeluqueriaActivity extends Fragment {
         spMovilidad.setAdapter(adapter1);
 
         spServicio = (Spinner) view.findViewById(R.id.spServicio);
-        String []opciones3={"BAÑO Y CORTE","CORTE"};
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones3);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
+        for (Hairdresser hairdresser :hairdresserList) {
+            adapter3.add(hairdresser.getDescripcion());
+        }
         spServicio.setAdapter(adapter3);
 
         spHora = (Spinner) view.findViewById(R.id.spHora);
