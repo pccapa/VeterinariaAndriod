@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,12 +36,18 @@ import pe.edu.upc.veterinaryapp.entities.Mobility;
 import pe.edu.upc.veterinaryapp.entities.Pet;
 
 public class ServicioPeluqueriaActivity extends Fragment {
+private final static String NINGUNO="NINGUNO";
+    private final static String PENDIENTE="PENDIENTE";
 
     private Spinner spMovilidad,spPet,spHora,spServicio;
-private TextView viewHora;
+private TextView viewHora,viewCosto;
+    private EditText txtFecha;
     private Button btGrabar;
     public static Database mDb;
+
     List<HairdresserService> hairdresserServiceList=null;
+    List<Hairdresser > hairdresserList=null;
+    List<Mobility > mobilityList=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +56,8 @@ private TextView viewHora;
         View view = inflater.inflate(R.layout.activity_servicio_peluqueria, container,
                 false);
         viewHora = (TextView) view.findViewById(R.id.textView6);
+        txtFecha = (EditText) view.findViewById(R.id.txtFecha);
+        viewCosto = (TextView) view.findViewById(R.id.viewCosto);
 
         mDb = new Database(getActivity());
         try {
@@ -56,15 +66,16 @@ private TextView viewHora;
             e.printStackTrace();
         }
 
-        List<Hairdresser > hairdresserList=null;
+
         hairdresserList= Database.mHairdresserDao.fetchAllHairdresser();
         List<Pet > petList=null;
         petList= Database.mPetDao.fetchAllPet();
-        List<Mobility > mobilityList=null;
         mobilityList= Database.mMobilityDao.fetchAllMobility();
         hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
 
-
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date ahora=new Date();
+        txtFecha.setText(dateFormat.format(ahora));
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
         MySpinnerAdapterPet adapter2 = new MySpinnerAdapterPet(getActivity(),android.R.layout.simple_spinner_item ,petList );
@@ -78,13 +89,19 @@ private TextView viewHora;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Mobility mobilidad= (Mobility) (parent.getItemAtPosition(position));
-                if( mobilidad.getDescripcion()=="NINGUNO" ){
-                    spHora.setVisibility(View.GONE);
-                    viewHora.setVisibility(View.GONE);
+                Hairdresser peluqueria =((Hairdresser) spServicio.getSelectedItem());
+
+                System.out.println(mobilidad.getIdMobility());
+                System.out.println(NINGUNO);
+                if( mobilidad.getIdMobility()==1 ){
+                    System.out.println("wsdfszdf");
+                    viewCosto.setText("0");
+                   //viewHora.setVisibility(View.INVISIBLE);
                 }
                 else{
-                    spHora.setVisibility(View.VISIBLE);
-                    viewHora.setVisibility(View.VISIBLE);
+                    viewCosto.setText(String.valueOf(mobilidad.getPrice()+peluqueria.getPrice()  )  );
+                   // spHora.setVisibility(View.VISIBLE);
+                    //viewHora.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -98,6 +115,29 @@ private TextView viewHora;
         spServicio = (Spinner) view.findViewById(R.id.spServicio);
         MySpinnerAdapterHairDresser adapter3 = new MySpinnerAdapterHairDresser(getActivity(),android.R.layout.simple_spinner_item,hairdresserList);
         spServicio.setAdapter(adapter3);
+        spServicio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Hairdresser peluqueria= (Hairdresser) (parent.getItemAtPosition(position));
+                Mobility mobilidad =((Mobility) spMovilidad.getSelectedItem());
+
+                System.out.println(mobilidad.getDescripcion());
+                if( mobilidad.getIdMobility()== 1 ){
+                    viewCosto.setText("0");
+                    //viewHora.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    viewCosto.setText(String.valueOf(mobilidad.getPrice()+peluqueria.getPrice()  )  );
+                    // spHora.setVisibility(View.VISIBLE);
+                    //viewHora.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         spHora = (Spinner) view.findViewById(R.id.spHora);
         String []opciones4={"11:00","12:00","13:00","14:00","15:00","16:00"};
@@ -117,38 +157,46 @@ private TextView viewHora;
         @Override
         public void onClick(View v) {
             //hairdresserServiceList
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             int contar=0;
 
+
             ////primera validacion
-            for ( HairdresserService lista:  hairdresserServiceList ){
+            if(txtFecha.getText().toString()==""  ){
+                Toast.makeText(getActivity().getApplicationContext(), "Ingrese una fecha de servicio.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else {
+                Calendar cal = Calendar.getInstance();
                 Date fechaToday = new Date();
+                Date fechaServicio=null;
+
+                cal.setTime(fechaToday);
+                cal.add(Calendar.DATE, 1);
+                fechaToday =cal.getTime();
+
                 fechaToday.setHours(0);
                 fechaToday.setMinutes(0);
                 fechaToday.setSeconds(0);
-
-                Date fechaServicio=null;
                 try {
-                    fechaServicio =dateFormat.parse(lista.getDateAppointment());
+                    fechaServicio =dateFormat.parse(txtFecha.getText().toString());
                 }
                 catch (ParseException ex){ System.out.println(ex.getMessage()); }
 
-                System.out.println(fechaToday.getDate());
-                System.out.println(fechaServicio.getDate());
+                System.out.println(fechaToday.toString() );
+                System.out.println(fechaServicio.toString());
 
                 if(fechaToday.equals(fechaServicio) || fechaToday.after(fechaServicio) ){
                     contar=1;
-                    break;
+                    Toast.makeText(getActivity().getApplicationContext(), "El registro de servicio se hace con un día de anticipación.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
             }
-            if (contar ==1 ){
-                Toast.makeText(getActivity().getApplicationContext(), "El registro de servicio se hace con un día de anticipación.", Toast.LENGTH_SHORT).show();
-                return;
-            }
+
 
             ////segunda  validacion
             for ( HairdresserService lista:  hairdresserServiceList ){
-                if(lista.getIdPet() ==(( Pet ) spPet.getSelectedItem()).getIdPet()  ){
+                if(lista.getIdPet() ==(( Pet ) spPet.getSelectedItem()).getIdPet() &&  lista.getStateAppointment() ==PENDIENTE ){
                     contar=1;
                     break;
                 }
@@ -158,13 +206,15 @@ private TextView viewHora;
                 return;
             }
 
-            double costo=0;
 
-            if(((Mobility)spMovilidad.getSelectedItem()).getDescripcion() != "NINGUNO"   )
-                costo = Double.parseDouble(spHora.getSelectedItem().toString());
+            ///guardado
+            /*double costo=0;
+            System.out.println(((Mobility)spMovilidad.getSelectedItem()).getDescripcion());
+            if(((Mobility)spMovilidad.getSelectedItem()).getDescripcion() != NINGUNO   )
+                costo = Double.parseDouble(txtCosto.getText().toString() );*/
 
-            Toast.makeText(getActivity().getApplicationContext(), "Grabación Exitosa, Costo Total :S/" +String.valueOf(costo) , Toast.LENGTH_SHORT).show();
 
+            Toast.makeText(getActivity().getApplicationContext(), "Grabación Exitosa, Costo Total: S/" +viewCosto.getText() , Toast.LENGTH_SHORT).show();
 
             Fragment fragment = null;
             fragment = new ServicioActivity();

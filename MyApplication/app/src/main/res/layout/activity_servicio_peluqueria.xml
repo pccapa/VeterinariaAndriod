@@ -144,7 +144,7 @@
             <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="time"
+            android:inputType="date"
             android:ems="10"
             android:id="@+id/txtFecha"
             style="@style/Theme.EditTextTheme"
@@ -183,14 +183,14 @@
                 android:id="@+id/textView6"
                 android:layout_column="0" />
 
-            <EditText
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="time"
-                android:ems="10"
-                android:id="@+id/txtCosto"
-                style="@style/Theme.EditTextTheme"
-                android:layout_column="1" />
+                android:text="0"
+                android:id="@+id/viewCosto"
+                android:layout_column="1"
+                style="@style/Theme.EditTextTheme" />
+
         </TableRow>
 
         <TableRow
@@ -205,6 +205,40 @@
                 android:text="GRABAR"
                 style="@style/Theme.ButtonTheme"
                 android:layout_column="0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         </TableRow>
     </TableLayout>
 
