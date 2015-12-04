@@ -119,7 +119,7 @@ public class Database {
 
 
             db.execSQL("INSERT INTO Race(idRace, descripcion) " +
-                    "VALUES(1,'PERRO'");
+                    "VALUES(1,'PERRO')");
 
             db.execSQL("INSERT INTO Race(idRace, descripcion) " +
                     "VALUES(2,'GATO')");
@@ -153,7 +153,7 @@ public class Database {
 
 
             db.execSQL("INSERT INTO Appointment_Type(idAppointmentType, descripcion) " +
-                    "VALUES(1,'DOMICILIO'");
+                    "VALUES(1,'DOMICILIO')");
 
             db.execSQL("INSERT INTO Appointment_Type(idAppointmentType, descripcion) " +
                     "VALUES(2,'CLINICA')");

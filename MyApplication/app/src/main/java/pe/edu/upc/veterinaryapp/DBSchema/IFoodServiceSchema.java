@@ -12,7 +12,7 @@ public interface IFoodServiceSchema {
     String COLUMN_FOOD_SERVICE_DATE = "dateAppointment";
     String COLUMN_FOOD_SERVICE_HOUR = "hourAppointment";
     String COLUMN_FOOD_SERVICE_STATE = "stateAppointment";
-	String COLUMN_FOOD_SERVICE_PRICE = "stateAppointment";
+	String COLUMN_FOOD_SERVICE_PRICE = "price";
 
  
 

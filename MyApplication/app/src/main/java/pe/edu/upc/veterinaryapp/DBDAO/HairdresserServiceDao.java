@@ -1,5 +1,6 @@
 package pe.edu.upc.veterinaryapp.DBDAO;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -102,4 +103,8 @@ public class HairdresserServiceDao extends DbContentProvider implements IHairdre
         return hairdresserServiceList;
     }
 
+    @Override
+    public int update(String tableName, ContentValues values, String selection, String[] selectionArgs) {
+        return super.update(tableName, values, selection, selectionArgs);
+    }
 }

@@ -65,8 +65,9 @@ private TextView viewHora;
         hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
-        ArrayAdapter<Pet> adapter2 = new ArrayAdapter<Pet>(getActivity(),android.R.layout.simple_spinner_item,petList);
+        MySpinnerAdapter adapter2 = new MySpinnerAdapter(getActivity(),android.R.layout.simple_spinner_item ,petList );
         spPet.setAdapter(adapter2);
+
 
         spMovilidad = (Spinner) view.findViewById(R.id.spMovilidad);
         ArrayAdapter<Mobility> adapter1 = new ArrayAdapter<Mobility>(getActivity(),android.R.layout.simple_spinner_item,mobilityList);
@@ -157,10 +158,17 @@ private TextView viewHora;
                     break;
                 }
             }
+            if (contar ==1 ){
+                Toast.makeText(getActivity().getApplicationContext(), "Ya solicitó servicio de peluquería  para " + (( Pet ) spPet.getSelectedItem()).getIdPet()  +". El estado de servicio estará pendiente de atención hasta la fecha de servicio de atención.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
+            double costo=0;
 
-            Context context =getActivity().getApplicationContext();
-            Toast.makeText(context, "El registro de servicio se hace con un día de anticipación.", Toast.LENGTH_SHORT).show();
+            if(((Mobility)spMovilidad.getSelectedItem()).getDescripcion() != "NINGUNO"   )
+                costo = Double.parseDouble(spHora.getSelectedItem().toString());
+
+            Toast.makeText(getActivity().getApplicationContext(), "Grabación Exitosa, Costo Total :S/" +String.valueOf(costo) , Toast.LENGTH_SHORT).show();
 
 
             Fragment fragment = null;
@@ -195,6 +203,46 @@ private TextView viewHora;
     }*/
 }
 
+
+ class MySpinnerAdapter extends ArrayAdapter<Pet>{
+
+    private Context context;
+    private List<Pet> myObjs;
+
+    public MySpinnerAdapter(Context context, int textViewResourceId,
+                            List<Pet> myObjs) {
+        super(context, textViewResourceId, myObjs);
+        this.context = context;
+        this.myObjs = myObjs;
+    }
+
+    public int getCount(){
+        return myObjs.size();
+    }
+
+    public Pet getItem(int position){
+        return myObjs.get(position) ;
+    }
+
+    public long getItemId(int position){
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView label = new TextView(context);
+        label.setText(myObjs.get(position).getName());
+        return label;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView,
+                                ViewGroup parent) {
+        TextView label = new TextView(context);
+        label.setText(myObjs.get(position).getName());
+        return label;
+    }
+}
 
   /*
     @Override
