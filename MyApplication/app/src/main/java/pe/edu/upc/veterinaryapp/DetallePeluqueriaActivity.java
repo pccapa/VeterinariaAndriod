@@ -11,10 +11,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import pe.edu.upc.veterinaryapp.DataBase.Database;
+import pe.edu.upc.veterinaryapp.entities.Hairdresser;
+import pe.edu.upc.veterinaryapp.entities.HairdresserService;
+import pe.edu.upc.veterinaryapp.entities.Mobility;
+import pe.edu.upc.veterinaryapp.entities.Pet;
+
 public class DetallePeluqueriaActivity extends Fragment {
+    private Spinner spMovilidad,spPet,spHora,spServicio;
+    public static Database mDb;
+    List<HairdresserService> hairdresserServiceList=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,6 +36,51 @@ public class DetallePeluqueriaActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_servicio, container,
                 false);
+
+        mDb = new Database(getActivity());
+        try {
+            mDb.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        /*
+        Bundle data = new Bundle();
+data.putString("name",value);
+Fragment fragment = new nameOfFragment();
+fragment.setArguments(data);
+
+aqui
+Bundle bundle = this.getArguments();
+        * */
+
+
+
+
+        List<Hairdresser> hairdresserList=null;
+        hairdresserList= Database.mHairdresserDao.fetchAllHairdresser();
+        List<Pet> petList=null;
+        petList= Database.mPetDao.fetchAllPet();
+        List<Mobility> mobilityList=null;
+        mobilityList= Database.mMobilityDao.fetchAllMobility();
+        hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
+
+        spPet = (Spinner) view.findViewById(R.id.spPet);
+        MySpinnerAdapterPet adapter2 = new MySpinnerAdapterPet(getActivity(),android.R.layout.simple_spinner_item ,petList );
+        spPet.setAdapter(adapter2);
+
+        spMovilidad = (Spinner) view.findViewById(R.id.spMovilidad);
+        MySpinnerAdapterMobility adapter1 = new MySpinnerAdapterMobility(getActivity(),android.R.layout.simple_spinner_item,mobilityList);
+        spMovilidad.setAdapter(adapter1);
+
+        spServicio = (Spinner) view.findViewById(R.id.spServicio);
+        MySpinnerAdapterHairDresser adapter3 = new MySpinnerAdapterHairDresser(getActivity(),android.R.layout.simple_spinner_item,hairdresserList);
+        spServicio.setAdapter(adapter3);
+
+        spHora = (Spinner) view.findViewById(R.id.spHora);
+        String []opciones4={"11:00","12:00","13:00","14:00","15:00","16:00"};
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones4);
+        spHora.setAdapter(adapter4);
 
         return view;
     }
@@ -80,3 +139,5 @@ public class DetallePeluqueriaActivity extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 }
+
+

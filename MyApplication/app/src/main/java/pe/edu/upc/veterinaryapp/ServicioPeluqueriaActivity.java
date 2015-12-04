@@ -64,22 +64,20 @@ private TextView viewHora;
         mobilityList= Database.mMobilityDao.fetchAllMobility();
         hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
 
+
+
         spPet = (Spinner) view.findViewById(R.id.spPet);
-        MySpinnerAdapter adapter2 = new MySpinnerAdapter(getActivity(),android.R.layout.simple_spinner_item ,petList );
+        MySpinnerAdapterPet adapter2 = new MySpinnerAdapterPet(getActivity(),android.R.layout.simple_spinner_item ,petList );
         spPet.setAdapter(adapter2);
 
 
         spMovilidad = (Spinner) view.findViewById(R.id.spMovilidad);
-        ArrayAdapter<Mobility> adapter1 = new ArrayAdapter<Mobility>(getActivity(),android.R.layout.simple_spinner_item,mobilityList);
-        /*for (Mobility mobility :mobilityList) {
-            adapter1.add(mobility.getDescripcion());
-        }*/
+        MySpinnerAdapterMobility adapter1 = new MySpinnerAdapterMobility(getActivity(),android.R.layout.simple_spinner_item,mobilityList);
         spMovilidad.setAdapter(adapter1);
         spMovilidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Mobility mobilidad= (Mobility) (parent.getItemAtPosition(position));
-                //System.out.println(mobilidad.getDescripcion());
                 if( mobilidad.getDescripcion()=="NINGUNO" ){
                     spHora.setVisibility(View.GONE);
                     viewHora.setVisibility(View.GONE);
@@ -98,10 +96,7 @@ private TextView viewHora;
 
 
         spServicio = (Spinner) view.findViewById(R.id.spServicio);
-        ArrayAdapter<Hairdresser> adapter3 = new ArrayAdapter<Hairdresser>(getActivity(),android.R.layout.simple_spinner_item,hairdresserList);
-        /*for (Hairdresser hairdresser :hairdresserList) {
-            adapter3.add(hairdresser.getDescripcion());
-        }*/
+        MySpinnerAdapterHairDresser adapter3 = new MySpinnerAdapterHairDresser(getActivity(),android.R.layout.simple_spinner_item,hairdresserList);
         spServicio.setAdapter(adapter3);
 
         spHora = (Spinner) view.findViewById(R.id.spHora);
@@ -204,12 +199,12 @@ private TextView viewHora;
 }
 
 
- class MySpinnerAdapter extends ArrayAdapter<Pet>{
+ class MySpinnerAdapterPet extends ArrayAdapter<Pet>{
 
     private Context context;
     private List<Pet> myObjs;
 
-    public MySpinnerAdapter(Context context, int textViewResourceId,
+    public MySpinnerAdapterPet(Context context, int textViewResourceId,
                             List<Pet> myObjs) {
         super(context, textViewResourceId, myObjs);
         this.context = context;
@@ -219,7 +214,6 @@ private TextView viewHora;
     public int getCount(){
         return myObjs.size();
     }
-
     public Pet getItem(int position){
         return myObjs.get(position) ;
     }
@@ -243,6 +237,86 @@ private TextView viewHora;
         return label;
     }
 }
+
+
+class MySpinnerAdapterMobility extends ArrayAdapter<Mobility>{
+
+    private Context context;
+    private List<Mobility> myObjs;
+
+    public MySpinnerAdapterMobility(Context context, int textViewResourceId,
+                               List<Mobility> myObjs) {
+        super(context, textViewResourceId, myObjs);
+        this.context = context;
+        this.myObjs = myObjs;
+    }
+
+    public int getCount(){
+        return myObjs.size();
+    }
+    public Mobility getItem(int position){
+        return myObjs.get(position) ;
+    }
+
+    public long getItemId(int position){
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView label = new TextView(context);
+        label.setText(myObjs.get(position).getDescripcion());
+        return label;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView,
+                                ViewGroup parent) {
+        TextView label = new TextView(context);
+        label.setText(myObjs.get(position).getDescripcion());
+        return label;
+    }
+}
+
+class MySpinnerAdapterHairDresser extends ArrayAdapter<Hairdresser>{
+
+    private Context context;
+    private List<Hairdresser> myObjs;
+
+    public MySpinnerAdapterHairDresser(Context context, int textViewResourceId,
+                                    List<Hairdresser> myObjs) {
+        super(context, textViewResourceId, myObjs);
+        this.context = context;
+        this.myObjs = myObjs;
+    }
+
+    public int getCount(){
+        return myObjs.size();
+    }
+    public Hairdresser getItem(int position){
+        return myObjs.get(position) ;
+    }
+
+    public long getItemId(int position){
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView label = new TextView(context);
+        label.setText(myObjs.get(position).getDescripcion());
+        return label;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView,
+                                ViewGroup parent) {
+        TextView label = new TextView(context);
+        label.setText(myObjs.get(position).getDescripcion());
+        return label;
+    }
+}
+
 
   /*
     @Override
