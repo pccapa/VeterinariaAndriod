@@ -7,6 +7,8 @@ import android.util.Log;
 
 import pe.edu.upc.veterinaryapp.DBDAO.CustomerDao;
 import pe.edu.upc.veterinaryapp.DBDAO.HairdresserDao;
+import pe.edu.upc.veterinaryapp.DBDAO.HairdresserServiceDao;
+import pe.edu.upc.veterinaryapp.DBDAO.MobilityDao;
 import pe.edu.upc.veterinaryapp.DBDAO.PetDao;
 import pe.edu.upc.veterinaryapp.DBDAO.UserDao;
 import java.sql.SQLException;
@@ -36,7 +38,8 @@ public class Database {
     public static CustomerDao mCustomerDao;
     public static HairdresserDao mHairdresserDao;
     public static PetDao mPetDao;
-
+    public static MobilityDao mMobilityDao;
+    public static HairdresserServiceDao mHairdresserServiceDao;
 
 
     public Database open() throws SQLException {
@@ -47,6 +50,8 @@ public class Database {
         mCustomerDao = new CustomerDao(mDb);
         mHairdresserDao =new HairdresserDao(mDb);
         mPetDao =new PetDao(mDb);
+        mMobilityDao =new MobilityDao(mDb);
+        mHairdresserServiceDao =new HairdresserServiceDao(mDb);
         return this;
     }
 
@@ -102,12 +107,14 @@ public class Database {
             db.execSQL("INSERT INTO Hairdresser(idHairdresser, descripcion,price) " +
                     "VALUES(2,'BAÑO Y CORTE',50)");
 
+            db.execSQL("INSERT INTO Mobility(idMobility, descripcion,price) " +
+                    "VALUES(1,'NINGUNO',0)");
 
             db.execSQL("INSERT INTO Mobility(idMobility, descripcion,price) " +
-                    "VALUES(1,'RECOJO',10)");
+                    "VALUES(2,'RECOJO',10)");
 
             db.execSQL("INSERT INTO Mobility(idMobility, descripcion,price) " +
-                    "VALUES(2,'RECOJO Y ENVIO',20)");
+                    "VALUES(3,'RECOJO Y ENVIO',20)");
 
 
 
@@ -153,6 +160,9 @@ public class Database {
 
             db.execSQL("INSERT INTO Pet (idPet, name,idRace,race,sexo,photo,idCustomer) " +
                     "VALUES(1,'RAMBO',1,'BOXER','MACHO',null,1)");
+
+            db.execSQL("INSERT INTO Pet (idPet, name,idRace,race,sexo,photo,idCustomer) " +
+                    "VALUES(2,'FIDO',1,'PERRO','MACHO',null,1)");
 
 
         }

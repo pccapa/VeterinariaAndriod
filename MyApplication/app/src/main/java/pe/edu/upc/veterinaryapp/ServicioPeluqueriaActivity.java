@@ -6,29 +6,40 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.DateTimeKeyListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import pe.edu.upc.veterinaryapp.DataBase.Database;
 import pe.edu.upc.veterinaryapp.entities.Hairdresser;
+import pe.edu.upc.veterinaryapp.entities.HairdresserService;
+import pe.edu.upc.veterinaryapp.entities.Mobility;
 import pe.edu.upc.veterinaryapp.entities.Pet;
 
 public class ServicioPeluqueriaActivity extends Fragment {
 
     private Spinner spMovilidad,spPet,spHora,spServicio;
-
+private TextView viewHora;
     private Button btGrabar;
     public static Database mDb;
+    List<HairdresserService> hairdresserServiceList=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +47,7 @@ public class ServicioPeluqueriaActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_servicio_peluqueria, container,
                 false);
+        viewHora = (TextView) view.findViewById(R.id.textView6);
 
         mDb = new Database(getActivity());
         try {
@@ -48,81 +60,107 @@ public class ServicioPeluqueriaActivity extends Fragment {
         hairdresserList= Database.mHairdresserDao.fetchAllHairdresser();
         List<Pet > petList=null;
         petList= Database.mPetDao.fetchAllPet();
-
+        List<Mobility > mobilityList=null;
+        mobilityList= Database.mMobilityDao.fetchAllMobility();
+        hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
-        //String []opciones2={"FIFO","LUCHITA"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
-        for (Pet pet :petList) {
-            adapter2.add(pet.getName());
-        }
+        ArrayAdapter<Pet> adapter2 = new ArrayAdapter<Pet>(getActivity(),android.R.layout.simple_spinner_item,petList);
         spPet.setAdapter(adapter2);
 
         spMovilidad = (Spinner) view.findViewById(R.id.spMovilidad);
-        //String []opciones1={"RECOJO Y ENVIO","ENVIO"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
-        for (Pet pet :petList) {
-            adapter1.add(pet.getName());
-        }
+        ArrayAdapter<Mobility> adapter1 = new ArrayAdapter<Mobility>(getActivity(),android.R.layout.simple_spinner_item,mobilityList);
+        /*for (Mobility mobility :mobilityList) {
+            adapter1.add(mobility.getDescripcion());
+        }*/
+        spMovilidad.setAdapter(adapter1);
+        spMovilidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Mobility mobilidad= (Mobility) (parent.getItemAtPosition(position));
+                //System.out.println(mobilidad.getDescripcion());
+                if( mobilidad.getDescripcion()=="NINGUNO" ){
+                    spHora.setVisibility(View.GONE);
+                    viewHora.setVisibility(View.GONE);
+                }
+                else{
+                    spHora.setVisibility(View.VISIBLE);
+                    viewHora.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         spServicio = (Spinner) view.findViewById(R.id.spServicio);
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
-        for (Hairdresser hairdresser :hairdresserList) {
+        ArrayAdapter<Hairdresser> adapter3 = new ArrayAdapter<Hairdresser>(getActivity(),android.R.layout.simple_spinner_item,hairdresserList);
+        /*for (Hairdresser hairdresser :hairdresserList) {
             adapter3.add(hairdresser.getDescripcion());
-        }
+        }*/
         spServicio.setAdapter(adapter3);
 
         spHora = (Spinner) view.findViewById(R.id.spHora);
-        String []opciones4={"09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"};
+        String []opciones4={"11:00","12:00","13:00","14:00","15:00","16:00"};
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones4);
         spHora.setAdapter(adapter4);
 
         btGrabar = (Button) view.findViewById(R.id.btGrabar);
-
         btGrabar.setOnClickListener(btGrabarOnClickListener);
 
         return view;
     }
 
 
-    /*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_servicio_peluqueria);
 
-        spPet = (Spinner) findViewById(R.id.spPet);
-        String []opciones2={"FIFO","LUCHITA"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones2);
-        spPet.setAdapter(adapter2);
-
-        spMovilidad = (Spinner) findViewById(R.id.spMovilidad);
-        String []opciones1={"RECOJO Y ENVIO","ENVIO"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones1);
-        spMovilidad.setAdapter(adapter1);
-
-        spServicio = (Spinner) findViewById(R.id.spServicio);
-        String []opciones3={"BAÑO Y CORTE","CORTE"};
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones3);
-        spServicio.setAdapter(adapter3);
-
-        spHora = (Spinner) findViewById(R.id.spHora);
-        String []opciones4={"09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"};
-        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones4);
-        spHora.setAdapter(adapter4);
-
-        btGrabar = (Button) findViewById(R.id.btGrabar);
-
-        btGrabar.setOnClickListener(btGrabarOnClickListener);
-    }
-*/
     View.OnClickListener btGrabarOnClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
+            //hairdresserServiceList
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            int contar=0;
+
+            ////primera validacion
+            for ( HairdresserService lista:  hairdresserServiceList ){
+                Date fechaToday = new Date();
+                fechaToday.setHours(0);
+                fechaToday.setMinutes(0);
+                fechaToday.setSeconds(0);
+
+                Date fechaServicio=null;
+                try {
+                    fechaServicio =dateFormat.parse(lista.getDateAppointment());
+                }
+                catch (ParseException ex){ System.out.println(ex.getMessage()); }
+
+                System.out.println(fechaToday.getDate());
+                System.out.println(fechaServicio.getDate());
+
+                if(fechaToday.equals(fechaServicio) || fechaToday.after(fechaServicio) ){
+                    contar=1;
+                    break;
+                }
+            }
+            if (contar ==1 ){
+                Toast.makeText(getActivity().getApplicationContext(), "El registro de servicio se hace con un día de anticipación.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            ////segunda  validacion
+            for ( HairdresserService lista:  hairdresserServiceList ){
+                if(lista.getIdPet() ==(( Pet ) spPet.getSelectedItem()).getIdPet()  ){
+                    contar=1;
+                    break;
+                }
+            }
+
 
             Context context =getActivity().getApplicationContext();
-            Toast.makeText(context, "Grabacion Exitosa: ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "El registro de servicio se hace con un día de anticipación.", Toast.LENGTH_SHORT).show();
 
 
             Fragment fragment = null;
@@ -156,3 +194,36 @@ public class ServicioPeluqueriaActivity extends Fragment {
         return super.onOptionsItemSelected(item);
     }*/
 }
+
+
+  /*
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_servicio_peluqueria);
+
+        spPet = (Spinner) findViewById(R.id.spPet);
+        String []opciones2={"FIFO","LUCHITA"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones2);
+        spPet.setAdapter(adapter2);
+
+        spMovilidad = (Spinner) findViewById(R.id.spMovilidad);
+        String []opciones1={"RECOJO Y ENVIO","ENVIO"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones1);
+        spMovilidad.setAdapter(adapter1);
+
+        spServicio = (Spinner) findViewById(R.id.spServicio);
+        String []opciones3={"BAÑO Y CORTE","CORTE"};
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones3);
+        spServicio.setAdapter(adapter3);
+
+        spHora = (Spinner) findViewById(R.id.spHora);
+        String []opciones4={"09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"};
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones4);
+        spHora.setAdapter(adapter4);
+
+        btGrabar = (Button) findViewById(R.id.btGrabar);
+
+        btGrabar.setOnClickListener(btGrabarOnClickListener);
+    }
+*/
