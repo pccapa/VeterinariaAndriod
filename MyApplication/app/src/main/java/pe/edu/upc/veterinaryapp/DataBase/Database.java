@@ -11,6 +11,7 @@ import pe.edu.upc.veterinaryapp.DBDAO.HairdresserServiceDao;
 import pe.edu.upc.veterinaryapp.DBDAO.MobilityDao;
 import pe.edu.upc.veterinaryapp.DBDAO.PetDao;
 import pe.edu.upc.veterinaryapp.DBDAO.UserDao;
+import  pe.edu.upc.veterinaryapp.DBDAO.DoctorDao;
 import java.sql.SQLException;
 
 import pe.edu.upc.veterinaryapp.DBSchema.ICustomerSchema;
@@ -25,6 +26,7 @@ import pe.edu.upc.veterinaryapp.DBSchema.IPetSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IAppointmentSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IFoodServiceSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IHairdresserServiceSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IDoctorSchema;
 
 public class Database {
 
@@ -32,7 +34,7 @@ public class Database {
     private static final String DATABASE_NAME = "veterianariaDB.db";
     private DatabaseHelper mDbHelper;
     // Increment DB Version on any schema change
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private final Context mContext;
     public static UserDao mUserDao;
     public static CustomerDao mCustomerDao;
@@ -40,6 +42,7 @@ public class Database {
     public static PetDao mPetDao;
     public static MobilityDao mMobilityDao;
     public static HairdresserServiceDao mHairdresserServiceDao;
+    public static DoctorDao mDoctorDao;
 
 
     public Database open() throws SQLException {
@@ -52,6 +55,7 @@ public class Database {
         mPetDao =new PetDao(mDb);
         mMobilityDao =new MobilityDao(mDb);
         mHairdresserServiceDao =new HairdresserServiceDao(mDb);
+        mDoctorDao = new DoctorDao(mDb);
         return this;
     }
 
@@ -176,16 +180,18 @@ public class Database {
 
             db.execSQL("DROP TABLE IF EXISTS " + IUserSchema.USER_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + ICustomerSchema.CUSTOMER_TABLE);
-            db.execSQL("DROP TABLE IF EXISTS " + IDoctorSchema.DOCTOR_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IHairdresserSchema.HAIR_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IMobilitySchema.MOBILITY_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IRaceSchema.RACE_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IFoodSchema.FOOD_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IAppointment_TypeSchema.APPOINTMENT_TYPE_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IPetSchema.PET_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IAppointmentSchema.APPOINTMENT_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IFoodServiceSchema.FOOD_SERVICE_TABLE_CREATE);
-            db.execSQL("DROP TABLE IF EXISTS " + IHairdresserServiceSchema.HAIR_SERVICE_TABLE_CREATE);
+            db.execSQL("DROP TABLE IF EXISTS " + IDoctorSchema.DOCTOR_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IHairdresserSchema.HAIR_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IMobilitySchema.MOBILITY_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IRaceSchema.RACE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IFoodSchema.FOOD_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IAppointment_TypeSchema.APPOINTMENT_TYPE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IPetSchema.PET_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IAppointmentSchema.APPOINTMENT_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IFoodServiceSchema.FOOD_SERVICE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + IHairdresserServiceSchema.HAIR_SERVICE_TABLE);
+
+
 
 
             onCreate(db);
