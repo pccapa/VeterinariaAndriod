@@ -5,28 +5,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.SQLException;
+
 import pe.edu.upc.veterinaryapp.DBDAO.CustomerDao;
+import pe.edu.upc.veterinaryapp.DBDAO.DoctorDao;
+import pe.edu.upc.veterinaryapp.DBDAO.FoodDao;
 import pe.edu.upc.veterinaryapp.DBDAO.HairdresserDao;
 import pe.edu.upc.veterinaryapp.DBDAO.HairdresserServiceDao;
 import pe.edu.upc.veterinaryapp.DBDAO.MobilityDao;
 import pe.edu.upc.veterinaryapp.DBDAO.PetDao;
 import pe.edu.upc.veterinaryapp.DBDAO.UserDao;
-import  pe.edu.upc.veterinaryapp.DBDAO.DoctorDao;
-import java.sql.SQLException;
-
-import pe.edu.upc.veterinaryapp.DBSchema.ICustomerSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IUserSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IDoctorSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IHairdresserSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IMobilitySchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IRaceSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IFoodSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IAppointment_TypeSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IPetSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IAppointmentSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IFoodServiceSchema;
-import pe.edu.upc.veterinaryapp.DBSchema.IHairdresserServiceSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IAppointment_TypeSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.ICustomerSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IDoctorSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IFoodSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IFoodServiceSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IHairdresserSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IHairdresserServiceSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IMobilitySchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IPetSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IRaceSchema;
+import pe.edu.upc.veterinaryapp.DBSchema.IUserSchema;
 
 public class Database {
 
@@ -43,6 +43,7 @@ public class Database {
     public static MobilityDao mMobilityDao;
     public static HairdresserServiceDao mHairdresserServiceDao;
     public static DoctorDao mDoctorDao;
+    public static FoodDao mFoodDao;
 
 
     public Database open() throws SQLException {
@@ -56,6 +57,7 @@ public class Database {
         mMobilityDao =new MobilityDao(mDb);
         mHairdresserServiceDao =new HairdresserServiceDao(mDb);
         mDoctorDao = new DoctorDao(mDb);
+        mFoodDao = new FoodDao(mDb);
         return this;
     }
 
@@ -88,6 +90,7 @@ public class Database {
             db.execSQL(IAppointmentSchema.APPOINTMENT_TABLE_CREATE);
             db.execSQL(IFoodServiceSchema.FOOD_SERVICE_TABLE_CREATE);
             db.execSQL(IHairdresserServiceSchema.HAIR_SERVICE_TABLE_CREATE);
+
 
 
 
