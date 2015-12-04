@@ -38,6 +38,7 @@ import pe.edu.upc.veterinaryapp.entities.Pet;
 public class ServicioPeluqueriaActivity extends Fragment {
 private final static String NINGUNO="NINGUNO";
     private final static String PENDIENTE="PENDIENTE";
+    private int idCustomer=1;
 
     private Spinner spMovilidad,spPet,spHora,spServicio;
 private TextView viewHora,viewCosto;
@@ -94,7 +95,6 @@ private TextView viewHora,viewCosto;
                 System.out.println(mobilidad.getIdMobility());
                 System.out.println(NINGUNO);
                 if( mobilidad.getIdMobility()==1 ){
-                    System.out.println("wsdfszdf");
                     viewCosto.setText("0");
                    //viewHora.setVisibility(View.INVISIBLE);
                 }
@@ -196,7 +196,7 @@ private TextView viewHora,viewCosto;
 
             ////segunda  validacion
             for ( HairdresserService lista:  hairdresserServiceList ){
-                if(lista.getIdPet() ==(( Pet ) spPet.getSelectedItem()).getIdPet() &&  lista.getStateAppointment() ==PENDIENTE ){
+                if(lista.getIdPet() ==(( Pet ) spPet.getSelectedItem()).getIdPet() &&  lista.getStateAppointment().equals(PENDIENTE) ){
                     contar=1;
                     break;
                 }
@@ -206,13 +206,23 @@ private TextView viewHora,viewCosto;
                 return;
             }
 
+            mDb = new Database(getActivity());
+            try {
+                mDb.open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-            ///guardado
-            /*double costo=0;
-            System.out.println(((Mobility)spMovilidad.getSelectedItem()).getDescripcion());
-            if(((Mobility)spMovilidad.getSelectedItem()).getDescripcion() != NINGUNO   )
-                costo = Double.parseDouble(txtCosto.getText().toString() );*/
-
+            Database.mHairdresserServiceDao.addHairdresserService(new HairdresserService(
+                    ((Hairdresser) spServicio.getSelectedItem()).getIdHairdresser(),
+                    idCustomer,
+                    ((Pet) spPet.getSelectedItem()).getIdPet(),
+                    ((Mobility) spMovilidad.getSelectedItem()).getIdMobility(),
+                    txtFecha.getText().toString(),
+                    viewHora.getText().toString(),
+                    "PENDIENTE",
+                    Double.parseDouble(viewCosto.getText().toString())
+            ));
 
             Toast.makeText(getActivity().getApplicationContext(), "Grabación Exitosa, Costo Total: S/" +viewCosto.getText() , Toast.LENGTH_SHORT).show();
 

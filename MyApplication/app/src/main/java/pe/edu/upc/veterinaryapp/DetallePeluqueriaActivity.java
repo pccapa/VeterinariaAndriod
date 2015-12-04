@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
@@ -27,6 +29,9 @@ import pe.edu.upc.veterinaryapp.entities.Pet;
 
 public class DetallePeluqueriaActivity extends Fragment {
     private Spinner spMovilidad,spPet,spHora,spServicio;
+private EditText txtCosto,txtFecha;
+
+    private int codigoServicio=0;
     public static Database mDb;
     List<HairdresserService> hairdresserServiceList=null;
 
@@ -34,8 +39,15 @@ public class DetallePeluqueriaActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_servicio, container,
+        View view = inflater.inflate(R.layout.activity_detalle_peluqueria, container,
                 false);
+
+        txtFecha = (EditText) view.findViewById(R.id.txtFecha);
+        txtCosto = (EditText) view.findViewById(R.id.txtCosto);
+
+        Bundle bundle = this.getArguments();
+        codigoServicio= Integer.parseInt(bundle.get("codigoServicio").toString());
+        System.out.println(bundle.get("codigoServicio").toString());
 
         mDb = new Database(getActivity());
         try {
@@ -44,17 +56,19 @@ public class DetallePeluqueriaActivity extends Fragment {
             e.printStackTrace();
         }
 
-        /*
-        Bundle data = new Bundle();
-data.putString("name",value);
+        hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
+        HairdresserService item= new HairdresserService();
+        for (HairdresserService hairdresserService: hairdresserServiceList  ){
+            if(hairdresserService.getIdHairService() == codigoServicio   ){
+                item = hairdresserService;
+                break;
+            }
+        }
+
+       /* Bundle data = new Bundle();
+        data.putString("name",value);
 Fragment fragment = new nameOfFragment();
-fragment.setArguments(data);
-
-aqui
-Bundle bundle = this.getArguments();
-        * */
-
-
+fragment.setArguments(data);*/
 
 
         List<Hairdresser> hairdresserList=null;
@@ -63,7 +77,7 @@ Bundle bundle = this.getArguments();
         petList= Database.mPetDao.fetchAllPet();
         List<Mobility> mobilityList=null;
         mobilityList= Database.mMobilityDao.fetchAllMobility();
-        hairdresserServiceList= Database.mHairdresserServiceDao.fetchAllHairdresserService();
+
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
         MySpinnerAdapterPet adapter2 = new MySpinnerAdapterPet(getActivity(),android.R.layout.simple_spinner_item ,petList );
@@ -81,6 +95,9 @@ Bundle bundle = this.getArguments();
         String []opciones4={"11:00","12:00","13:00","14:00","15:00","16:00"};
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, opciones4);
         spHora.setAdapter(adapter4);
+
+        txtFecha.setText(item.getDateAppointment());
+        txtCosto.setText(item.getHourAppointment());
 
         return view;
     }

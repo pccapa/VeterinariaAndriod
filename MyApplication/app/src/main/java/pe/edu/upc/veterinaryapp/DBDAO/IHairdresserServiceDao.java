@@ -9,4 +9,5 @@ import pe.edu.upc.veterinaryapp.entities.HairdresserService;
  */
 public interface IHairdresserServiceDao {
     List<HairdresserService> fetchAllHairdresserService();
+    boolean addHairdresserService(HairdresserService hairdresserService);
 }

@@ -16,10 +16,18 @@ public class HairdresserService {
     private double priceAppointment;
 
 
-
-
-
-public HairdresserService(){}
+public HairdresserService(  int  idHairdresser, int idCustomer,int idPet,int idMobility,String dateAppointment,String hourAppointment
+                            , String stateAppointment, double priceAppointment ){
+    this.idHairdresser=idHairdresser;
+    this.idCustomer=idCustomer;
+    this.idPet=idPet;
+    this.idMobility=idMobility;
+    this.dateAppointment=dateAppointment;
+    this.hourAppointment=hourAppointment;
+    this.stateAppointment=stateAppointment;
+    this.priceAppointment=priceAppointment;
+}
+    public HairdresserService(){}
 
     public int getIdHairService() {
         return idHairService;
