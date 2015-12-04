@@ -9,10 +9,16 @@ public class Doctor {
     public String doctorName;
     public String doctorLastName;
 
+    public Doctor(int idDoctor,String doctorName,String doctorLastName){
+        this.idDoctor = idDoctor;
+        this.doctorName= doctorName;
+        this.doctorLastName= doctorLastName;
+    }
+
+
     public Doctor(){
 
     }
-
 
     public int getIdDoctor() {
         return idDoctor;

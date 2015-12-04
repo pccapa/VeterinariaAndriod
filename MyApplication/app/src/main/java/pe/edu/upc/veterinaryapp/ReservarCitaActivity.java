@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,28 +18,72 @@ import android.widget.Toast;
 import android.view.Gravity;
 import android.content.Context;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import pe.edu.upc.veterinaryapp.DataBase.Database;
+import pe.edu.upc.veterinaryapp.entities.Doctor;
+import pe.edu.upc.veterinaryapp.adapter.spinner.SpinnerAdapterDoctor;
+import pe.edu.upc.veterinaryapp.entities.Pet;
+import pe.edu.upc.veterinaryapp.adapter.spinner.SpinnerAdapterPet;
+
+
 public class ReservarCitaActivity extends Fragment {
 
     private Spinner spDoctor,spPet,spType,spHora;
     private Button btGrabar;
+    List<Doctor> doctorList = new ArrayList<Doctor>();
+    List<Pet> petList = new ArrayList<Pet>();
 
+    public static final String TAG = ReservarCitaActivity.class.getSimpleName();
+    public static Database mDb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Context context = inflater.getContext();
+        mDb = new Database(context);
+
+
+
         View view = inflater.inflate(R.layout.activity_reservar_cita , container,
                 false);
 
+
+        try {
+          int var =1;
+           doctorList = Database.mDoctorDao.fetchAllDoctor();
+            petList = Database.mPetDao.fetchAllPetbyIdCustumer(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Log.i(TAG, "doctorList : " + doctorList.size());
+
+
+
+
         spDoctor = (Spinner) view.findViewById(R.id.spDoctor);
-        String []opciones1={"ANA COTRINA","GUSTAVO SALAZAR","RODRIGO  MEDINA"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones1);
+        SpinnerAdapterDoctor adapter1 = new SpinnerAdapterDoctor(getActivity(),android.R.layout.simple_spinner_item,doctorList);
         spDoctor.setAdapter(adapter1);
 
+
+
+       /* String []opciones1={"ANA COTRINA","GUSTAVO SALAZAR","RODRIGO  MEDINA"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones1);
+        spDoctor.setAdapter(adapter1);*/
+
         spPet = (Spinner) view.findViewById(R.id.spPet);
-        String []opciones2={"FIFO","LUCHITA"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones2);
+        SpinnerAdapterPet adapter2 = new SpinnerAdapterPet(getActivity(),android.R.layout.simple_spinner_item,petList);
         spPet.setAdapter(adapter2);
+
+       /* String []opciones2={"FIFO","LUCHITA"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones2);
+        spPet.setAdapter(adapter2);*/
+
+
 
         spType = (Spinner) view.findViewById(R.id.spType);
         String []opciones3={"DOMICILIO","CLINICA"};

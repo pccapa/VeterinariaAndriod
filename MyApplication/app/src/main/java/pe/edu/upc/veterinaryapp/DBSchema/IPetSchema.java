@@ -35,7 +35,7 @@ public interface IPetSchema {
             + "FOREIGN KEY(" + COLUMN_ID_CUSTOMER +") REFERENCES Customer(" + COLUMN_ID_CUSTOMER +")" +
             ")" ;
 
-    String[] USER_COLUMNS = new String[] { COLUMN_PET_ID,
+    String[] PET_COLUMNS = new String[] { COLUMN_PET_ID,
             COLUMN_PET_NAME, COLUMN_RACE_ID, COLUMN_ID_CUSTOMER};
 
 }

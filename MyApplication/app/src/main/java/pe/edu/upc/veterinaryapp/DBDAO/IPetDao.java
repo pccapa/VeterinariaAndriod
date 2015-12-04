@@ -9,4 +9,6 @@ import pe.edu.upc.veterinaryapp.entities.Pet;
  */
 public interface IPetDao {
     List<Pet> fetchAllPet();
+
+    List<Pet> fetchAllPetbyIdCustumer(int CustumerId);
 }

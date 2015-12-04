@@ -74,8 +74,31 @@ public class PetDao extends DbContentProvider implements IPetSchema, IPetDao {
     @Override
     public List<Pet> fetchAllPet() {
         List<Pet> PetList = new ArrayList<Pet>();
-        cursor = super.query(PET_TABLE , USER_COLUMNS, null,
+        cursor = super.query(PET_TABLE , PET_COLUMNS, null,
                 null, COLUMN_PET_ID);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Pet pet = cursorToEntity(cursor);
+                PetList.add(pet);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+
+        return PetList;
+    }
+
+
+    @Override
+    public List<Pet> fetchAllPetbyIdCustumer(int CustumerId) {
+
+        List<Pet> PetList = new ArrayList<Pet>();
+        final String selectionArgs[] = { String.valueOf(CustumerId) };
+        final String selection = COLUMN_ID_CUSTOMER + " = ?";
+        cursor = super.query(PET_TABLE , PET_COLUMNS, null,
+                null, COLUMN_ID_CUSTOMER);
 
         if (cursor != null) {
             cursor.moveToFirst();
