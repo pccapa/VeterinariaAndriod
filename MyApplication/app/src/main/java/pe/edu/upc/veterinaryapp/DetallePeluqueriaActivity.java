@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -98,6 +99,33 @@ fragment.setArguments(data);*/
 
         txtFecha.setText(item.getDateAppointment());
         txtCosto.setText(item.getHourAppointment());
+        for (int i=0;i<adapter4.getCount();i++){
+            if (adapter4.getItem(i).equals(item.getHourAppointment())   ){
+                spHora.setSelection(i);
+                break;
+            }
+        }
+
+
+        for (int i=0;i<adapter3.getCount();i++){
+            if (adapter3.getItem(i).getIdHairdresser() == item.getIdHairdresser()    ){
+                spServicio.setSelection(i);
+                break;
+            }
+        }
+        for (int i=0;i<adapter2.getCount();i++){
+            if (adapter2.getItem(i).getIdPet() == item.getIdPet()    ){
+                spPet.setSelection(i);
+                break;
+            }
+        }
+        for (int i=0;i<adapter1.getCount();i++){
+            if (adapter1.getItem(i).getIdMobility() == item.getIdMobility()    ){
+                spMovilidad.setSelection(i);
+                break;
+            }
+        }
+
 
         return view;
     }
