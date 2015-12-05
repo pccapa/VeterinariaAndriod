@@ -140,7 +140,25 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btModificarCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MODIFICAR CITA"
+                style="@style/Theme.ButtonTheme" />
+
+
+
+            <Button
+                android:id="@+id/btEliminarCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ELIMINAR CITA"
+                style="@style/Theme.ButtonTheme" />
 
         </TableRow>
     </TableLayout>

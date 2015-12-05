@@ -27,6 +27,8 @@ import pe.edu.upc.veterinaryapp.DBSchema.IMobilitySchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IPetSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IRaceSchema;
 import pe.edu.upc.veterinaryapp.DBSchema.IUserSchema;
+import pe.edu.upc.veterinaryapp.DBDAO.Appointment_TypeDao;
+import pe.edu.upc.veterinaryapp.DBDAO.AppointmentDao;
 
 public class Database {
 
@@ -34,7 +36,7 @@ public class Database {
     private static final String DATABASE_NAME = "veterianariaDB.db";
     private DatabaseHelper mDbHelper;
     // Increment DB Version on any schema change
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 9;
     private final Context mContext;
     public static UserDao mUserDao;
     public static CustomerDao mCustomerDao;
@@ -44,6 +46,8 @@ public class Database {
     public static HairdresserServiceDao mHairdresserServiceDao;
     public static DoctorDao mDoctorDao;
     public static FoodDao mFoodDao;
+    public static Appointment_TypeDao mAppointmentTypeDao;
+    public static AppointmentDao mAppointmentDao;
 
 
     public Database open() throws SQLException {
@@ -58,6 +62,8 @@ public class Database {
         mHairdresserServiceDao =new HairdresserServiceDao(mDb);
         mDoctorDao = new DoctorDao(mDb);
         mFoodDao = new FoodDao(mDb);
+        mAppointmentTypeDao = new Appointment_TypeDao(mDb);
+        mAppointmentDao = new AppointmentDao(mDb);
         return this;
     }
 
@@ -166,11 +172,16 @@ public class Database {
                     "VALUES(2,'CLINICA')");
 
             db.execSQL("INSERT INTO Pet (idPet, name,idRace,race,sexo,photo,idCustomer) " +
-                    "VALUES(1,'RAMBO',1,'BOXER','MACHO',null,1)");
+                    "VALUES(1,'PACO',1,'BOXER','MACHO',null,1)");
 
             db.execSQL("INSERT INTO Pet (idPet, name,idRace,race,sexo,photo,idCustomer) " +
-                    "VALUES(2,'FIDO',1,'PERRO','MACHO',null,1)");
+                    "VALUES(2,'FIDO',1,'SIBERIANO','MACHO',null,1)");
 
+            db.execSQL("INSERT INTO Appointment(idAppointment, dateAppointment,hourAppointment,descripcionAppointment,stateAppointment,idCustomer,idPet,idDoctor,idAppointmentType) " +
+                    "VALUES(1,'07/12/2015','10:00','Limpieza de oidos','PENDIENTE',1,1,1,1)");
+
+            db.execSQL("INSERT INTO Appointment(idAppointment, dateAppointment,hourAppointment,descripcionAppointment,stateAppointment,idCustomer,idPet,idDoctor,idAppointmentType) " +
+                    "VALUES(2,'08/12/2015','16:00','Control de peso','PENDIENTE',1,2,1,1)");
 
         }
 

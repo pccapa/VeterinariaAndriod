@@ -2,9 +2,10 @@ package pe.edu.upc.veterinaryapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,26 +19,89 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.AdapterView.OnItemClickListener;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import pe.edu.upc.veterinaryapp.DataBase.Database;
+import pe.edu.upc.veterinaryapp.adapter.spinner.SpinnerAdapterPet;
+import pe.edu.upc.veterinaryapp.entities.Appointment;
+import pe.edu.upc.veterinaryapp.entities.Pet;
+import pe.edu.upc.veterinaryapp.adapter.listview.LVPrincipalAdapterCita;
+
 public class ConsultarCitaActivity extends Fragment {
 
     private Spinner  spPet;
     private ListView  lv;
     private String[] listaCitas = { "Cita1", "Cita2", "Cita3"};
-
+    public static final String TAG = ConsultarCitaActivity.class.getSimpleName();
+    public static Database mDb;
+    List<Appointment>  appList = new ArrayList<Appointment>();
+    List<Pet>    petList    = new ArrayList<Pet>();
+    Integer codDoctor,codPet,codCustomer,codAppType;
+    ArrayList<String> mLstCita = new ArrayList<>();
+    private LVPrincipalAdapterCita  mLVPrincipalAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_consultar_cita , container,
+        View view = inflater.inflate(R.layout.activity_consultar_cita, container,
                 false);
 
-        spPet = (Spinner) view.findViewById(R.id.spPet);
-        String []opciones2={"FIFO","LUCHITA"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones2);
-        spPet.setAdapter(adapter2);
+        Context context = inflater.getContext();
 
+        mDb = new Database(context);
+        try {
+            mDb.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //List<Appointment> appList
+
+        try {
+            petList = Database.mPetDao.fetchAllPetbyIdCustumer(1);
+            appList = Database.mAppointmentDao.fetchAllAppointmentPending();
+            Log.i(TAG, "appList : " + appList.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        spPet = (Spinner) view.findViewById(R.id.spPet);
+        SpinnerAdapterPet adapter2 = new SpinnerAdapterPet(getActivity(),android.R.layout.simple_spinner_item,petList);
+        spPet.setAdapter(adapter2);
+        spPet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Pet pet = (Pet) (parent.getItemAtPosition(position));
+                Log.i(TAG, "getIdPet : " + pet.getIdPet());
+                mLVPrincipalAdapter.clear();
+                codPet = pet.getIdPet();
+                appList = Database.mAppointmentDao.fetchAllAppointmentPending();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+        for(int i=0;i<appList.size();i++) {
+            mLstCita.add(appList.get(i).getDescripcionAppointment());
+        }
 
         lv = (ListView) view.findViewById(R.id.listaCita);
-        ArrayAdapter adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, listaCitas);
+
+
+        mLVPrincipalAdapter = new LVPrincipalAdapterCita(this.getActivity(), new ArrayList<Appointment>());
+
+
+        ArrayAdapter adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, mLstCita);
 
         lv.setAdapter(adapter);
 

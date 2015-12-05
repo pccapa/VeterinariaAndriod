@@ -20,7 +20,7 @@ public interface IAppointmentSchema {
             + APPOINTMENT_TABLE
             + " ("
             + COLUMN_APPOINTMENT_ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + " INTEGER PRIMARY KEY , "
             + COLUMN_APPOINTMENT_DATE
             + " TEXT, "
             + COLUMN_APPOINTMENT_HOUR
@@ -37,10 +37,10 @@ public interface IAppointmentSchema {
             + " INTEGER, "
             + COLUMN_APPOINTMENT_TYPE_ID
             + " INTEGER, "
-            + "FOREIGN KEY(" + COLUMN_ID_CUSTOMER +") REFERENCES Customer (" + COLUMN_ID_CUSTOMER +"),"
-            + "FOREIGN KEY(" + COLUMN_PET_ID +") REFERENCES Pet (" + COLUMN_PET_ID +"),"
-            + "FOREIGN KEY(" + COLUMN_DOCTOR_ID +") REFERENCES Doctor (" + COLUMN_DOCTOR_ID +"),"
-            + "FOREIGN KEY(" + COLUMN_APPOINTMENT_TYPE_ID +") REFERENCES Appointment_Type (" + COLUMN_APPOINTMENT_TYPE_ID +")" +
+            + "FOREIGN KEY(" + COLUMN_ID_CUSTOMER +") REFERENCES Customer (" + COLUMN_ID_CUSTOMER + "),"
+            + "FOREIGN KEY(" + COLUMN_PET_ID + ") REFERENCES Pet (" + COLUMN_PET_ID + "),"
+            + "FOREIGN KEY(" + COLUMN_DOCTOR_ID + ") REFERENCES Doctor (" + COLUMN_DOCTOR_ID + "),"
+            + "FOREIGN KEY(" + COLUMN_APPOINTMENT_TYPE_ID + ") REFERENCES Appointment_Type (" + COLUMN_APPOINTMENT_TYPE_ID + ")" +
             ")" ;
 
 

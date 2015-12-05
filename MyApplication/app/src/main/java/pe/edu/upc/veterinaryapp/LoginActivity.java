@@ -33,7 +33,8 @@ public class LoginActivity extends  AppCompatActivity {
 
     public static final String TAG = LoginActivity.class.getSimpleName();
     public static Database mDb;
-
+    User user = null;
+    Customer customer = null;
 
 
 
@@ -92,11 +93,12 @@ public class LoginActivity extends  AppCompatActivity {
 
 
             if (isComplete) {
-                User user = null;
+
                 boolean existe = false;
 
                 try {
                     user = Database.mUserDao.findUser( etUser.getText().toString(),etPassword.getText().toString()) ;
+                    customer = Database.mCustomerDao.fetchCustomerById(user.getIdCustomer());
                     existe = true;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -105,9 +107,15 @@ public class LoginActivity extends  AppCompatActivity {
 
                 if(existe){
                     Log.i(TAG, "Existe");
+//                    Log.i(TAG,   customer.getNombres().toString() + " " + customer.getApellidoMaterno());
+                    //  intent.putExtra("NOMBRES", customer.getNombres());
+                    //   intent.putExtra("APELLIDOS", customer.apellidoPaterno + " " + customer.apellidoMaterno);
+
                     Intent intent = new Intent(LoginActivity.this, NavegacionActivity.class);
-                    intent.putExtra("NOMBRES", etUser.getText().toString() );
-                    intent.putExtra("APELLIDOS", etPassword.getText().toString());
+                  //   intent.putExtra("ID", customer.getIdCustomer().);
+                   //  intent.putExtra("NOMBRES", customer.getNombres());
+                  //   intent.putExtra("APELLIDOS", customer.apellidoPaterno + " " + customer.apellidoMaterno);
+
                     startActivity(intent);
                     finish();
                 }

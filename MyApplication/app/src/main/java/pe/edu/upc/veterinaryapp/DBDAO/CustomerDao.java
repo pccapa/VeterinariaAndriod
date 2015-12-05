@@ -12,6 +12,7 @@ import java.util.List;
 import pe.edu.upc.veterinaryapp.DBProvider.DbContentProvider;
 import pe.edu.upc.veterinaryapp.DBSchema.ICustomerSchema;
 import pe.edu.upc.veterinaryapp.entities.Customer;
+import pe.edu.upc.veterinaryapp.entities.User;
 
 
 public class CustomerDao  extends DbContentProvider implements ICustomerSchema, ICustomerDao {
@@ -45,10 +46,6 @@ public class CustomerDao  extends DbContentProvider implements ICustomerSchema, 
     }
 
 
-    @Override
-    public Customer fetchCustomerById(int idCustomer) {
-        return null;
-    }
 
     @Override
     public List<Customer> fetchAllCustomers() {
@@ -75,5 +72,24 @@ public class CustomerDao  extends DbContentProvider implements ICustomerSchema, 
     @Override
     public boolean deleteAllCustomers() {
         return false;
+    }
+
+    @Override
+    public Customer fetchCustomerById(int idCustomer) {
+        final String selectionArgs[] = { String.valueOf(idCustomer) };
+        final String selection = COLUMN_ID + " = ?";
+        Customer customer = new Customer();
+        cursor = super.query(CUSTOMER_TABLE, CUSTOMER_COLUMNS, selection,
+                selectionArgs, COLUMN_ID);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                customer = cursorToEntity(cursor);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+
+        return customer;
     }
 }

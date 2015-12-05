@@ -13,4 +13,5 @@ public interface ICustomerDao {
     // add Customers in bulk
      boolean addCustomers(List<Customer> customer);
     boolean deleteAllCustomers();
+
 }

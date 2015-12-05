@@ -21,7 +21,7 @@ import android.widget.Toast;
 public class DetalleCitaActivity extends Fragment {
 
     private Spinner spDoctor,spPet,spType,spHora;
-
+    private Button btModificarCita,btEliminarCita;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +35,7 @@ public class DetalleCitaActivity extends Fragment {
         spDoctor.setAdapter(adapter1);
 
         spPet = (Spinner) view.findViewById(R.id.spPet);
-        String []opciones2={"FIFO","LUCHITA"};
+        String []opciones2={"PACO","LUCHITA"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones2);
         spPet.setAdapter(adapter2);
 
@@ -49,9 +49,45 @@ public class DetalleCitaActivity extends Fragment {
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, opciones4);
         spHora.setAdapter(adapter4);
 
-
+        btModificarCita = (Button) view.findViewById(R.id.btModificarCita);
+        btEliminarCita = (Button) view.findViewById(R.id.btEliminarCita);
+        btModificarCita.setOnClickListener(btModificarCitaCitaOnClickListener);
+        btEliminarCita.setOnClickListener(btEliminarCitaOnClickListener);
         return view;
     }
+
+
+    View.OnClickListener btModificarCitaCitaOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Toast.makeText(getActivity().getApplicationContext(),"Reserva Actualizada ", Toast.LENGTH_SHORT).show();
+            Fragment fragment = null;
+            fragment = new CitaActivity();
+
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+           // Intent intent = new Intent(getActivity().this, MenuActivity.class);
+            //startActivityForResult(intent, REQUEST_CODE);
+        }
+    };
+
+
+    View.OnClickListener btEliminarCitaOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Toast.makeText(getActivity().getApplicationContext(),"Reserva Eliminada ", Toast.LENGTH_SHORT).show();
+            Fragment fragment = null;
+            fragment = new CitaActivity();
+
+            FragmentManager frgManager = getFragmentManager();
+            frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            // Intent intent = new Intent(getActivity().this, MenuActivity.class);
+            //startActivityForResult(intent, REQUEST_CODE);
+        }
+    };
+
     /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
