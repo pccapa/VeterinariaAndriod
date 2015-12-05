@@ -149,7 +149,10 @@
                 android:ems="10"
                 android:id="@+id/txtFecha"
                 style="@style/Theme.EditTextTheme"
-                android:layout_column="1" />
+                android:layout_column="1"
+
+                />
+
         </TableRow>
 
         <TableRow
@@ -184,14 +187,13 @@
                 android:id="@+id/textView6"
                 android:layout_column="0" />
 
-            <EditText
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="time"
-                android:ems="10"
-                android:id="@+id/txtCosto"
-                style="@style/Theme.EditTextTheme"
-                android:layout_column="1" />
+                android:id="@+id/viewCosto"
+                android:layout_column="1"
+                android:hint="costo" />
+
         </TableRow>
 
         <TableRow
